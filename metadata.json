@@ -1,0 +1,6 @@
+{
+  "name": "VisaAssist AI",
+  "description": "Virtual Visa Agents for USA & UK visa application guide, document checks, tracking, and live AI assistant advice.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
