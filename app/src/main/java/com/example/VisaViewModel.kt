@@ -206,14 +206,13 @@ class VisaViewModel(application: Application) : AndroidViewModel(application) {
     val chatError: StateFlow<String?> = _chatError.asStateFlow()
 
     init {
-        // Pre-populate empty DB with a starter demo visa application
+        // Pre-populate empty DB with a starter demo visa application safely without collectLatest cancellation races
         viewModelScope.launch {
-            applications.collectLatest { list ->
-                if (list.isEmpty()) {
-                    seedStarterApplication()
-                } else if (_selectedApplicationId.value == null) {
-                    _selectedApplicationId.value = list.first().uid
-                }
+            val list = repository.allApplications.first()
+            if (list.isEmpty()) {
+                seedStarterApplication()
+            } else if (_selectedApplicationId.value == null) {
+                _selectedApplicationId.value = list.first().uid
             }
         }
 
